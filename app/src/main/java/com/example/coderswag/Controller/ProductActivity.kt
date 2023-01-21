@@ -1,16 +1,22 @@
 package com.example.coderswag.Controller
 
+import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.coderswag.Adapter.ProductAdapter
+import com.example.coderswag.Model.Product
 import com.example.coderswag.R
 import com.example.coderswag.Services.DataService
 import com.example.coderswag.Utilities.EXTRA_CATEGORY
-import kotlinx.android.synthetic.main.activity_product.*
+import com.example.coderswag.Utilities.EXTRA_PRODUCT
 
-class ProductActivity : AppCompatActivity() {
+import kotlinx.android.synthetic.main.activity_product.*
+import kotlinx.android.synthetic.main.product_list_item.*
+
+class ProductActivity : AppCompatActivity(){
 
     lateinit var adapter : ProductAdapter
 
@@ -22,7 +28,12 @@ class ProductActivity : AppCompatActivity() {
 
         val categoryType = intent.getStringExtra(EXTRA_CATEGORY)
 
-        adapter = ProductAdapter(this, DataService.getProducts(categoryType))
+        adapter = ProductAdapter(this, DataService.getProducts(categoryType)){ product ->
+            val productDetailsIntent = Intent(this, ProductDetails::class.java)
+            productDetailsIntent.putExtra(EXTRA_PRODUCT,product)
+            startActivity(productDetailsIntent)
+        }
+
 
         var spanCount = 2
         val orientation = resources.configuration.orientation
@@ -37,5 +48,7 @@ class ProductActivity : AppCompatActivity() {
         val layoutManager = GridLayoutManager(this,spanCount)
         productListView.layoutManager= layoutManager
         productListView.adapter = adapter
+        }
+
     }
-}
+
