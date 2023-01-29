@@ -33,6 +33,7 @@ class CategoryRecyclerAdapter(val context : Context, val categories : List<Categ
         return Holder(view, itemClick)
     }
 
+
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bindCategory(categories[position], context)
     }
