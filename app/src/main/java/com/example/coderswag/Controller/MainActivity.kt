@@ -16,12 +16,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var adapter : CategoryRecyclerAdapter
+    lateinit var adapter: CategoryRecyclerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        adapter = CategoryRecyclerAdapter(this,DataService.categories)  { category ->
+        adapter = CategoryRecyclerAdapter(this, DataService.categories) { category ->
             val productIntent = Intent(this, ProductActivity::class.java)
             productIntent.putExtra(EXTRA_CATEGORY, category.title)
             startActivity(productIntent)
@@ -31,8 +31,6 @@ class MainActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         categoryListView.layoutManager = layoutManager
         categoryListView.setHasFixedSize(true)
-
-
 
 
     }
