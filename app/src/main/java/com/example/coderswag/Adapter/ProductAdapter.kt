@@ -11,14 +11,20 @@ import com.example.coderswag.Model.Category
 import com.example.coderswag.Model.Product
 import com.example.coderswag.R
 
-class ProductAdapter(val context: Context, val products: List<Product>, val itemClick: (Product) -> Unit) : RecyclerView.Adapter<ProductAdapter.ProductHolder>() {
-    inner class ProductHolder(itemView: View,  val itemClick: (Product) -> Unit) : RecyclerView.ViewHolder(itemView) {
+class ProductAdapter(
+    val context: Context,
+    val products: List<Product>,
+    val itemClick: (Product) -> Unit
+) : RecyclerView.Adapter<ProductAdapter.ProductHolder>() {
+    inner class ProductHolder(itemView: View, val itemClick: (Product) -> Unit) :
+        RecyclerView.ViewHolder(itemView) {
         val productImage = itemView?.findViewById<ImageView>(R.id.productImage)
         val productName = itemView?.findViewById<TextView>(R.id.productName)
         val productPrice = itemView?.findViewById<TextView>(R.id.productPrice)
 
         fun bindProduct(product: Product, context: Context) {
-            val resourceId =context.resources.getIdentifier(product.image, "drawable", context.packageName)
+            val resourceId =
+                context.resources.getIdentifier(product.image, "drawable", context.packageName)
             productImage?.setImageResource(resourceId)
             productName?.text = product.title
             productPrice?.text = product.price
@@ -39,8 +45,6 @@ class ProductAdapter(val context: Context, val products: List<Product>, val item
     override fun getItemCount(): Int {
         return products.count()
     }
-
-
 
 
 }
